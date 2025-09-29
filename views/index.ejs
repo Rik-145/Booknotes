@@ -1,0 +1,19 @@
+<body>
+<%- include('partials/header.ejs'); %>
+<h1>My Book Notes</h1>
+
+<div class="container">
+    <div class="bookCover">
+        <img src="/images/bookPlaceholder.jpeg " alt="cover" class="coverIMG">
+    </div>
+
+    <div class="bookDescription">
+        <h2><%= bookNotesData.title %> </h2>
+        <p> <%= bookNotesData.synopse %> </p>
+    </div>
+
+    <input type="button" value="My thoughts" class="thoughtsButton" formaction="/details">
+</div>
+
+<%- include('partials/footer.ejs'); %>
+</body>

@@ -1,0 +1,53 @@
+.container {
+    border: 5px solid #fff;
+    width: fit-content;
+    height: fit-content;
+}
+
+.bookCover {
+    border: 5px solid purple;
+    width: fit-content;
+    height: fit-content;
+}
+
+.coverIMG {
+    width: 15rem;
+    height: 22rem;
+}
+
+.bookDescription{
+    border: 5px solid red;
+    max-width: 15rem;
+}
+
+.bookDescription p{
+    overflow: hidden;
+    max-width: 15rem;
+    max-height: 6rem;
+}
+
+.thoughtsButton {
+    margin: 10px 10px 10px 20px;
+    height: 30px;
+    width: 150px;
+    border-radius: 5px;
+    text-align: center;
+    background-color: mediumblue;
+    border: none;
+}
+
+* {
+    background-color: #000;
+    color: #fff;
+}
+
+h1 {
+    color: #fff;
+    text-align: center;
+}
+
+footer {
+    flex: 0 0 auto;
+    color: white;
+    text-align: center;
+}
