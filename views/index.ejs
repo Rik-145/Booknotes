@@ -2,17 +2,24 @@
 <%- include('partials/header.ejs'); %>
 <h1>My Book Notes</h1>
 
-<div class="container">
-    <div class="bookCover">
-        <img src="/images/bookPlaceholder.jpeg " alt="cover" class="coverIMG">
-    </div>
+<div class="cardWrapper">
+    <% bookNotesData.forEach((book) => { %>
+        <div class="container">
+            <div class="bookCover">
+                <img src=" https://covers.openlibrary.org/b/isbn/<%= book.isbn %>-L.jpg?default=false " alt=" <%= book.title %>" class="coverIMG">
+            </div>
 
-    <div class="bookDescription">
-        <h2><%= bookNotesData.title %> </h2>
-        <p> <%= bookNotesData.synopse %> </p>
-    </div>
+            <div class="bookDescription">
+                <h2><%= book.title %> </h2>
+                <p> <%= book.synopse %> </p>
+            </div>
 
-    <input type="button" value="My thoughts" class="thoughtsButton" formaction="/details">
+            <form action="/details" method="get">
+                <input type="hidden" name="id" value="<%= book.id %>">
+                <input type="submit" value="My thoughts" class="thoughtsButton">
+            </form>
+        </div>
+    <% }) %>
 </div>
 
 <%- include('partials/footer.ejs'); %>
