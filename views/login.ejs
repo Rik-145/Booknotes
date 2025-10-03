@@ -1,0 +1,25 @@
+<%- include('partials/header.ejs') %>
+
+
+    <div class="loginContainer">
+        <form method="POST" action="/login">
+            <input type="hidden" name="action" value="login"/>
+            <div class="user">
+                <label>Username: <input name="username" value="<%= loginData?.username || '' %>"/></label>
+            </div>
+            <div class="pass">
+                <label>Password: <input type="password" name="password"/></label>
+            </div>
+            <div class="loginButton">
+                <input type="submit" value="login">
+            </div>
+        </form>
+
+        <div id="error" style="color: red;">
+            <% if (typeof errorMessage !== "undefined" && errorMessage) { %>
+                <p style="color: red;"><%= errorMessage %></p>
+            <% } %>
+        </div>
+    </div>
+
+<%- include('partials/footer.ejs') %>

@@ -18,6 +18,18 @@
     flex: 0 0 auto;
 }
 
+.loginContainer *:not(label) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.loginContainer *:not(label, input, .loginButton) {
+    padding: 5px;
+}
+
 .bookCover {
     display: flex;
     flex-direction: column;
@@ -57,25 +69,25 @@
 
 .thoughtsButton {
     display: block;
-    margin: 15px auto;           /* centraliza horizontalmente */
+    margin: 15px auto; /* centraliza horizontalmente */
     height: 40px;
     width: 160px;
-    border-radius: 8px;          /* cantos mais arredondados */
+    border-radius: 8px; /* cantos mais arredondados */
     background: linear-gradient(45deg, #4a90e2, #357ab8); /* gradiente azul */
     color: #fff;
     font-weight: bold;
     font-size: 1rem;
     border: none;
     cursor: pointer;
-    transition: all 0.3s ease;   /* animação suave ao hover */
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2); /* sombra suave */
+    transition: all 0.3s ease; /* animação suave ao hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* sombra suave */
     text-align: center;
 }
 
 .thoughtsButton:hover {
     background: linear-gradient(45deg, #357ab8, #2a5d8f); /* gradiente escurece */
     transform: translateY(-2px); /* leve elevação */
-    box-shadow: 0 6px 8px rgba(0,0,0,0.3);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
 }
 
 /*END CHAT GPT*/
