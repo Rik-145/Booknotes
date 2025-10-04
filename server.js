@@ -18,20 +18,11 @@ const db = new pg.Pool({
 });
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(express.static("public"));
 
-async function login() {
-    const resultData = await db.query("SELECT * FROM users");
-    const loginData = resultData.rows;
-
-    return loginData;
-}
-
 app.get("/", async (req, res) => {
-    //do i really need to pass info here?
-    //isnt it just to render login page and then when button clicked check if every thing matches=
-    const loginData = login();
-    res.render("login.ejs", {loginData: loginData});
+    res.render("login.ejs");
 });
 
 app.post("/login", async (req, res) => {
@@ -55,6 +46,19 @@ app.post("/login", async (req, res) => {
     } catch (err) {
         console.log(err);
     }
+});
+
+app.post("/add", async (req, res) => {
+    res.render("add.ejs");
+})
+
+app.post("/search", async (req, res) => {
+    const bookName = req.body.search.toLowerCase();
+
+    const resultData = await db.query("SELECT * FROM book WHERE title ILIKE $1", [`%${bookName}%`]);
+    const result = resultData.rows;
+
+    res.render("index.ejs", {bookNotesData: result});
 })
 
 app.listen(port, () => {

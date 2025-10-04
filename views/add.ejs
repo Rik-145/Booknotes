@@ -1,0 +1,37 @@
+<%- include('partials/header.ejs'); %>
+
+<div class="bigAddContainer">
+    <div class="addContainer">
+        <form action="add" method="post">
+            <div>
+                <label>Title:*</label>
+                <input type="text" name="title" placeholder="Book Title">
+            </div>
+            <div>
+                <label>Author Name:*</label>
+                <input type="text" name="author" placeholder="Author">
+            </div>
+            <div>
+                <label>Synopse:</label>
+                <input type="text" name="synopse" placeholder="Synopse">
+            </div>
+            <div>
+                <label>Number of Pages:*</label>
+                <input type="text" name="pages" placeholder="Pages">
+            </div>
+            <div>
+                <label>Isbn:*</label>
+                <input type="text" name="isbn" placeholder="ISBN">
+            </div>
+            <div class="buttonContainer">
+                <input type="submit" value="Add New Book">
+                <button type="button" onclick="window.history.back()">Cancel</button>
+            </div>
+            <div class="warning">
+                <label>* Required</label>
+            </div>
+        </form>
+    </div>
+</div>
+
+<%- include('partials/footer.ejs'); %>

@@ -1,17 +1,41 @@
 <%- include('partials/header.ejs') %>
 
+<div class="bigContainer">
+    <div class="leftContainer">
+        <h2> My Book Notes</h2>
+        <p>My Book Notes is a dedicated application designed to support readers in organizing and enhancing their
+            reading
+            experience. The app enables users to:</p>
+        <ul>
+            <li>Record and monitor their reading progress, including specific page tracking.</li>
+            <li>Create, update, and manage personalized book entries.</li>
+            <li>Categorize books by status, such as Reading, Read, or Finished.</li>
+            <li>Write and store personal reviews and reflections for each title.</li>
+        </ul>
+        <p>With a focus on clarity and functionality, My Book Notes provides readers with a structured yet flexible way
+            to
+            manage their literary journey.</p>
+    </div>
 
-    <div class="loginContainer">
+    <div class="rightContainer">
         <form method="POST" action="/login">
             <input type="hidden" name="action" value="login"/>
             <div class="user">
-                <label>Username: <input name="username" value="<%= loginData?.username || '' %>"/></label>
+                <label>Username:</label>
+                <input name="username"/>
             </div>
+
             <div class="pass">
-                <label>Password: <input type="password" name="password"/></label>
+                <label>Password:</label>
+                <input type="password" name="password"/>
             </div>
+
+<!--            <div class="remenberMe">-->
+<!--                <input type="checkbox"> Remember me-->
+<!--            </div>-->
+
             <div class="loginButton">
-                <input type="submit" value="login">
+                <input type="submit" value="Login">
             </div>
         </form>
 
@@ -21,5 +45,6 @@
             <% } %>
         </div>
     </div>
+</div>
 
 <%- include('partials/footer.ejs') %>

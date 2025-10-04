@@ -1,3 +1,139 @@
+html, body {
+    height: 50%;
+    margin: 0;
+    padding: 0;
+}
+
+/*Login*/
+.bigContainer {
+    border: 1px solid green;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    max-width: 90rem;
+    margin: 0 auto;
+    min-height: 50vh;
+    padding: 10rem;
+}
+
+.leftContainer, .leftContainer * {
+    /*CHANGE*/
+    background: lightslategray;
+}
+
+.rightContainer, .rightContainer * {
+    /*CHANGE*/
+    background: darkslategray;
+}
+
+.leftContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: flex-start;
+    text-align: left;
+    width: 70%;
+    padding: 50px;
+    box-sizing: border-box;
+}
+
+.leftContainer h2 {
+    width: 100%;
+    text-align: center;
+}
+
+.rightContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    width: 30%;
+    padding: 50px;
+    box-sizing: border-box;
+}
+
+.user,
+.pass {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.user label,
+.pass label {
+    align-self: center;
+    width: 105%;
+    text-align: left;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.user input,
+.pass input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+
+/*.remenberMe {*/
+/*    width: 110%;*/
+/*    display: flex;*/
+/*    justify-content: flex-start;*/
+/*    align-items: center;*/
+/*    flex-direction: row;*/
+/*    margin-bottom: 10px;*/
+/*}*/
+
+.loginButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.loginButton input {
+    width: 40%;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.loginButton input:hover {
+    /*CHANGE*/
+    background: darkgreen;
+}
+
+/*Search & Add*/
+.topBar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+
+.topBar input {
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+/*Cards*/
 .cardWrapper {
     display: flex;
     flex-direction: row;
@@ -16,18 +152,6 @@
     box-sizing: border-box;
     width: 18rem;
     flex: 0 0 auto;
-}
-
-.loginContainer *:not(label) {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-}
-
-.loginContainer *:not(label, input, .loginButton) {
-    padding: 5px;
 }
 
 .bookCover {
@@ -67,6 +191,7 @@
 
 /*CHATGPT*/
 
+/*CHANGE*/
 .thoughtsButton {
     display: block;
     margin: 15px auto; /* centraliza horizontalmente */
@@ -92,6 +217,74 @@
 
 /*END CHAT GPT*/
 
+
+/*ADD*/
+.bigAddContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+    padding: 5rem;
+}
+
+.addContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    max-width: 600px;
+    width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.addContainer div {
+    display: flex;
+    flex-direction: column;
+}
+
+.addContainer label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+.addContainer input {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.buttonContainer input[type="submit"],
+.buttonContainer button {
+    cursor: pointer;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+}
+
+.buttonContainer input[type="submit"] {
+    background-color: #4CAF50;
+}
+
+.buttonContainer button {
+    background-color: #f44336;
+}
+
+.warning{
+    font-size: small;
+    text-align: center;
+}
+
+
 * {
     background-color: #000;
     color: #fff;
@@ -106,4 +299,88 @@ footer {
     flex: 0 0 auto;
     color: white;
     text-align: center;
+}
+
+@media (max-width: 1400px) {
+    .bigContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: stretch;
+        max-width: 90rem;
+        margin: 0 auto;
+        min-height: 100%;
+        padding: 0;
+        padding-top: 7rem;
+        padding-bottom: 7rem;
+    }
+
+    .cardWrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        align-items: flex-start;
+        gap: 5rem;
+        padding: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 10px;
+        box-sizing: border-box;
+        width: 15rem;
+        flex: 0 0 auto;
+    }
+
+    .coverIMG {
+        width: 100%;
+        height: 20rem;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+}
+
+@media (max-width: 500px) {
+    .bigContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: stretch;
+        max-width: 90rem;
+        margin: 0 auto;
+        min-height: 100%;
+        padding: 0;
+        padding-top: 7rem;
+        padding-bottom: 7rem;
+    }
+
+    .cardWrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 5rem;
+        padding: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 10px;
+        box-sizing: border-box;
+        width: 15rem;
+        flex: 0 0 auto;
+    }
+
+    .coverIMG {
+        width: 100%;
+        height: 20rem;
+        object-fit: cover;
+        border-radius: 5px;
+    }
 }
