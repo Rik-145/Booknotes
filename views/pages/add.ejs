@@ -1,0 +1,51 @@
+<%- include('../partials/header.ejs'); %>
+
+<div class="top-right-user">
+    <% if (username) { %>
+        Welcome, <strong><%= username %></strong>
+    <% } %>
+</div>
+
+<div class="bigAddContainer">
+    <div class="addContainer">
+        <form action="/addBook" method="POST">
+            <div>
+                <label>Title:*</label>
+                <input type="text" name="title" placeholder="Book Title" value="<%= bookData ? bookData.title : '' %>">
+            </div>
+            <div>
+                <label>Author Name:*</label>
+                <input type="text" name="author" placeholder="Author" value="<%= bookData ? bookData.author : '' %>">
+            </div>
+            <div>
+                <label>Synopse:</label>
+                <input type="text" name="synopse" placeholder="Synopse" value="<%= bookData ? bookData.synopse : '' %>">
+            </div>
+            <div>
+                <label>Number of Pages:*</label>
+                <input type="text" name="pages" placeholder="Pages" value="<%= bookData ? bookData.pages : '' %>">
+            </div>
+            <div>
+                <label>Isbn:*</label>
+                <input type="text" name="isbn" placeholder="ISBN" value="<%= bookData ? bookData.isbn : '' %>">
+            </div>
+            <div class="buttonContainer">
+                <input type="submit" value="Add New Book">
+                <button type="button" onclick="window.history.back()">Cancel</button>
+            </div>
+            <div class="warning">
+                <label>* Required</label>
+            </div>
+        </form>
+
+        <div id="error" style="color: red; text-align: center;">
+            <% if (typeof errorMessage !== "undefined" && errorMessage) { %>
+                <p style="color: red;"><%= errorMessage %></p>
+            <% } %>
+        </div>
+
+
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs'); %>

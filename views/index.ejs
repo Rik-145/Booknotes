@@ -2,7 +2,7 @@
 <%- include('partials/header.ejs'); %>
 
 <div class="topBar">
-    <form action="/add" method="post">
+    <form action="/add" method="get">
         <input type="submit" name="add" value="Add Book">
     </form>
 
@@ -10,6 +10,12 @@
         <input type="text" name="search" id="liveSearch" placeholder="Search Book">
         <input type="submit" value="Search Book">
     </form>
+
+    <div class="top-right-user">
+        <% if (username) { %>
+            Welcome, <strong><%= username %></strong>
+        <% } %>
+    </div>
 </div>
 
 
@@ -27,7 +33,7 @@
                     <p> <%= book.synopse %> </p>
                 </div>
 
-                <form action="/details" method="get">
+                <form action="/details" method="post">
                     <input type="hidden" name="id" value="<%= book.id %>">
                     <input type="submit" value="My thoughts" class="thoughtsButton">
                 </form>

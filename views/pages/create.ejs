@@ -1,0 +1,43 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="bigAddContainer">
+    <div class="addContainer">
+        <form action="createAccount" method="post">
+            <div>
+                <label>Username:</label>
+                <input type="text" name="username" id="username" placeholder="Username" minlength="3" required>
+            </div>
+            <div class="passwordContainer">
+                <label>Password:</label>
+                <input type="password" name="password" id="password1" placeholder="Password">
+                <button type="button" id="togglePassword"
+                        onclick="const pass = document.getElementById('password1'); pass.type = pass.type === 'password' ? 'text' : 'password';">
+                    👁
+                </button>
+
+            </div>
+
+            <div class="passwordContainer">
+                <label>Repeat Password:</label>
+                <input type="password" name="passwords" id= 'password2' placeholder="Repeat Password">
+                <button type="button" id="togglePassword"
+                        onclick="const pass = document.getElementById('password2'); pass.type = pass.type === 'password' ? 'text' : 'password';">
+                    👁
+                </button>
+            </div>
+
+            <div class="buttonContainer">
+                <input type="submit" value="Create Account">
+                <button type="button" onclick="window.history.back()">Cancel</button>
+            </div>
+        </form>
+
+        <div id="error" style="color: red; text-align: center">
+            <% if (typeof errorMessage !== "undefined" && errorMessage) { %>
+                <p style="color: red;"><%= errorMessage %></p>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

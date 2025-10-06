@@ -1,4 +1,4 @@
-<%- include('partials/header.ejs') %>
+<%- include('../partials/header.ejs') %>
 
 <div class="bigContainer">
     <div class="leftContainer">
@@ -27,24 +27,37 @@
 
             <div class="pass">
                 <label>Password:</label>
-                <input type="password" name="password"/>
+                <input type="password" id="password" name="password"/>
+                <button type="button" id="togglePassword"
+                        onclick="const pass = document.getElementById('password'); pass.type = pass.type === 'password' ? 'text' : 'password';">
+                    👁
+                </button>
             </div>
 
-<!--            <div class="remenberMe">-->
-<!--                <input type="checkbox"> Remember me-->
-<!--            </div>-->
+            <!--            <div class="remenberMe">-->
+            <!--                <input type="checkbox"> Remember me-->
+            <!--            </div>-->
 
             <div class="loginButton">
                 <input type="submit" value="Login">
             </div>
         </form>
 
+        <form action="/create" method="post">
+            <div class="create">
+                <input type="hidden" name="action" value="create"/>
+                <a HREF="/create">Create Account</a>
+            </div>
+        </form>
+
         <div id="error" style="color: red;">
-            <% if (typeof errorMessage !== "undefined" && errorMessage) { %>
+            <% if (errorMessage === "Account created successfully"){ %>
+                <p style="color: green;"><%= errorMessage %></p>
+            <% } else if (typeof errorMessage !== "undefined" && errorMessage) { %>
                 <p style="color: red;"><%= errorMessage %></p>
             <% } %>
         </div>
     </div>
 </div>
 
-<%- include('partials/footer.ejs') %>
+<%- include('../partials/footer.ejs') %>
