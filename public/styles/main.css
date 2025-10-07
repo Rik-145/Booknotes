@@ -179,6 +179,29 @@ html, body {
     margin-top: 5px;
 }
 
+.topBarNotes {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0 auto;
+    gap: 10px;
+}
+
+.topBarNotes input {
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
 /*Cards*/
 .cardWrapper {
     display: flex;
@@ -232,7 +255,8 @@ html, body {
     margin-top: 5px;
     margin-bottom: 0;
     max-height: 10rem;
-    overflow: hidden;
+    overflow: scroll;
+    scrollbar-width: thin;
 }
 
 /*CHATGPT*/
@@ -325,7 +349,7 @@ html, body {
     background-color: #f44336;
 }
 
-.warning{
+.warning {
     font-size: small;
     text-align: center;
 }
@@ -343,7 +367,7 @@ html, body {
     padding: 5rem;
 }
 
-.leftContainerUpdate{
+.leftContainerUpdate {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -367,11 +391,12 @@ html, body {
 
 .bookDescriptionUpdate {
     margin-top: 5px;
-    height: 2rem;
+    height: fit-content;
     padding: 10px;
     overflow: hidden;
 }
-.bookDescriptionUpdate h2{
+
+.bookDescriptionUpdate h2 {
     text-align: center;
     margin-top: 5px;
     margin-bottom: 0;

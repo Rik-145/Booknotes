@@ -1,20 +1,26 @@
 <%- include('../partials/header.ejs') %>
 
-<div class="top-right-user">
-    <% if (username) { %>
-        Welcome, <strong><%= username %></strong>
-    <% } %>
+<div class="topBarNotes">
+    <form action="/deleteBook" method="post">
+        <input type="submit" name="delete" value="Delete Book">
+    </form>
+
+    <div class="top-right-user">
+        <% if (username) { %>
+            Welcome, <strong><%= username %></strong>
+        <% } %>
+    </div>
 </div>
 
 <div class="parentContainerUpdate">
     <div class="leftContainerUpdate">
         <div class="containerUpdate">
             <div class="bookCover">
-                <img src="https://covers.openlibrary.org/b/isbn/<%= bookData[0].isbn %>-L.jpg?default=false"
-                     alt="<%= bookData[0].title %>" class="coverIMG">
+                <img src="https://covers.openlibrary.org/b/isbn/<%= bookData.isbn %>-L.jpg?default=false"
+                     alt="<%= bookData.title %>" class="coverIMG">
             </div>
             <div class="bookDescriptionUpdate">
-                <h2><%= bookData[0].title %> </h2>
+                <h2><%= bookData.title %> </h2>
             </div>
         </div>
     </div>
@@ -35,11 +41,11 @@
             <div>
                 <label for="rating">Your Rating:*</label>
                 <select name="rating" id="rating">
-                    <option value="1" <%= bookData[0] && bookData[0].rating == 1 ? "selected" : "" %>>★☆☆☆☆ (1)</option>
-                    <option value="2" <%= bookData[0] && bookData[0].rating == 2 ? "selected" : "" %>>★★☆☆☆ (2)</option>
-                    <option value="3" <%= bookData[0] && bookData[0].rating == 3 ? "selected" : "" %>>★★★☆☆ (3)</option>
-                    <option value="4" <%= bookData[0] && bookData[0].rating == 4 ? "selected" : "" %>>★★★★☆ (4)</option>
-                    <option value="5" <%= bookData[0] && bookData[0].rating == 5 ? "selected" : "" %>>★★★★★ (5)</option>
+                    <option value="1" <%= bookData && bookData.rating == 1 ? "selected" : "" %>>★☆☆☆☆ (1)</option>
+                    <option value="2" <%= bookData && bookData.rating == 2 ? "selected" : "" %>>★★☆☆☆ (2)</option>
+                    <option value="3" <%= bookData && bookData.rating == 3 ? "selected" : "" %>>★★★☆☆ (3)</option>
+                    <option value="4" <%= bookData && bookData.rating == 4 ? "selected" : "" %>>★★★★☆ (4)</option>
+                    <option value="5" <%= bookData && bookData.rating == 5 ? "selected" : "" %>>★★★★★ (5)</option>
                 </select>
             </div>
 
@@ -50,14 +56,14 @@
                         name="pages"
                         id="pages"
                         placeholder="Total pages read"
-                        value="<%= myData[0] ? myData[0].mypages : '' %>"
+                        value="<%= bookData ? bookData.mypages : '' %>"
                         min="0"
-                        max="<%= bookData[0] ? bookData[0].pages : '' %>"
+                        max="<%= bookData ? bookData.pages : '' %>"
                         e
                         required
                 >
                 <small>
-                    (0 to <%= bookData[0] ? bookData[0].pages : 'N/A' %> pages)
+                    (0 to <%= bookData ? bookData.pages : 'N/A' %> pages)
                 </small>
             </div>
 
@@ -69,8 +75,8 @@
                         id="finishedDate"
                         min="1900-01-01"
                         max="<%= new Date().toISOString().split('T')[0] %>"
-                        value="<%= bookData[0] && bookData[0].finishedDate
-                                ? bookData[0].finishedDate.toISOString().split('T')[0]
+                        value="<%= bookData && bookData.finishedDate
+                                ? bookData.finishedDate.toISOString().split('T')[0]
                                 : new Date().toISOString().split('T')[0] %>"
                 >
                 <small>Select a date between 1900-01-01 and today</small>

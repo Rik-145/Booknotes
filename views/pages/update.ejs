@@ -1,4 +1,57 @@
 <%- include('../partials/header.ejs'); %>
 
+<div class="parentContainerUpdate">
+    <div class="leftContainerUpdate">
+        <div class="containerUpdate">
+            <div class="bookCover">
+                <img src="https://covers.openlibrary.org/b/isbn/<%= bookData.isbn %>-L.jpg?default=false"
+                     alt="<%= bookData.title %>" class="coverIMG">
+            </div>
+            <div class="bookDescriptionUpdate">
+                <h2><%= bookData.title %></h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="updateContainer">
+        <form action="/updateNotes" method="POST">
+            <div>
+                <label for="notes">Notes:</label>
+                <textarea name="notes" id="notes" rows="5"><%= mynotesData.notes || '' %></textarea>
+            </div>
+
+            <div>
+                <label for="rating">Your Rating:</label>
+                <select name="rating" id="rating">
+                    <% for (let i = 1; i <= 5; i++) { %>
+                        <option value="<%= i %>" <%= mynotesData.rating == i ? 'selected' : '' %>>
+                            <%= '★'.repeat(i) + '☆'.repeat(5 - i) %> (<%= i %>)
+                        </option>
+                    <% } %>
+                </select>
+            </div>
+
+            <div>
+                <label for="pages">Pages read:</label>
+                <input type="number" name="pages" id="pages"
+                       value="<%= mynotesData.mypages || 0 %>"
+                       min="0" max="<%= bookData.pages %>">
+            </div>
+
+            <div>
+                <label for="finishedDate">Finish Date:</label>
+                <input type="date" name="finishedDate" id="finishedDate"
+                       value="<%= mynotesData.finishdate
+                               ? new Date(mynotesData.finishdate).toISOString().split('T')[0]
+                               : new Date().toISOString().split('T')[0] %>">
+            </div>
+
+            <div class="buttonContainer">
+                <input type="submit" value="Save Changes">
+                <button type="button" onclick="window.history.back()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 <%- include('../partials/footer.ejs'); %>

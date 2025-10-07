@@ -1,0 +1,55 @@
+<%- include('../partials/header.ejs'); %>
+
+<div class="topBarNotes">
+    <form action="/updateNotes" method="get">
+        <input type="submit" name="update" value="Update Notes">
+    </form>
+
+    <form action="/deleteNote" method="post">
+        <input type="submit" name="delete" value="Delete Note">
+    </form>
+
+    <form action="/deleteBook" method="post">
+        <input type="submit" name="delete" value="Delete Book">
+    </form>
+
+    <form action="/books" method="get">
+        <input type="submit" value="Go Back">
+    </form>
+
+    <div class="top-right-user">
+        <% if (username) { %>
+            Welcome, <strong><%= username %></strong>
+        <% } %>
+    </div>
+</div>
+
+<div class="notesParentContainer">
+    <div class="notesContainer">
+        <div class="topLeftNotes">
+            <img src=" https://covers.openlibrary.org/b/isbn/<%= bookData.isbn %>-L.jpg?default=false "
+                 alt="<%= bookData.title %>" class="coverIMG">
+            <div class="bottomLeftNotes">
+                <h2> <%= bookData.title %> </h2>
+            </div>
+        </div>
+
+        <div class="rightNotes">
+            <label>My thoughts:</label>
+            <p> <%= mynotesData.notes %> </p>
+            <hr>
+            <label>Rating:</label>
+            <p> <%= mynotesData.rating %> </p>
+            <hr>
+            <label>Pages:</label>
+            <p> <%= mynotesData.mypages %> </p>
+            <hr>
+            <label>Finish Date:</label>
+            <p> <%= mynotesData.finishdate.toISOString().split('T')[0] %></p>
+
+            %>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs'); %>

@@ -54,8 +54,8 @@ app.post("/login", async (req, res) => {
 
         userID = user.id;
         userName = user.username;
-        console.log(userName);
-        console.log(userID);
+        // console.log(userName);
+        // console.log(userID);
 
         return res.render("index.ejs", {bookNotesData: bookNotesData});
     } catch (err) {
@@ -160,30 +160,95 @@ app.post("/createAccount", async (req, res) => {
 })
 
 app.post("/details", async (req, res) => {
-    const bookid = parseInt(req.body.id, 10);
-    bookID = bookid;
-    const bookData = await db.query("SELECT * FROM book WHERE id = $1", [bookID]);
-    const myData = await db.query("SELECT * FROM mynotes WHERE bookid = $1 AND userid = $2", [bookID, userID]);
+    try {
+        const bookid = parseInt(req.body.id, 10);
+        bookID = bookid;
 
-    // console.log(bookData.rows);
-    res.render("pages/details.ejs", {myData: myData.rows, bookData: bookData.rows});
-})
+        const bookResult = await db.query("SELECT * FROM book WHERE id = $1", [bookID]);
+        const notesResult = await db.query("SELECT * FROM mynotes WHERE bookid = $1 AND userid = $2", [bookID, userID]);
+
+        const bookData = bookResult.rows[0];
+        const mynotesData = notesResult.rows[0];
+
+        if (mynotesData) {
+            res.render("pages/notes.ejs", {bookData, mynotesData});
+        } else {
+            res.render("pages/details.ejs", {bookData, errorMessage: ""});
+        }
+    } catch (e) {
+        console.log(e);
+        res.render("pages/login.ejs", {errorMessage: "Error loading details"});
+    }
+});
+
 
 app.post("/updateNotes", async (req, res) => {
     try {
-        const notes = req.body.notes;
-        const rating = req.body.rating;
-        const pages = req.body.pages;
-        const finishDate = req.body.finishedDate;
+        const { notes, rating, pages, finishedDate } = req.body;
 
+        const existing = await db.query(
+            "SELECT * FROM mynotes WHERE bookid = $1 AND userid = $2",
+            [bookID, userID]
+        );
 
-        await db.query("INSERT INTO mynotes (notes, rating, mypages, finishdate, bookid, userid) VALUES ($1,$2,$3,$4,$5,$6)", [notes, rating, pages, finishDate, bookID, userID]);
+        if (existing.rows.length > 0) {
+            await db.query(
+                "UPDATE mynotes SET notes=$1, rating=$2, mypages=$3, finishdate=$4 WHERE bookid=$5 AND userid=$6",
+                [notes, rating, pages, finishedDate, bookID, userID]
+            );
+        } else {
+            await db.query(
+                "INSERT INTO mynotes (notes, rating, mypages, finishdate, bookid, userid) VALUES ($1,$2,$3,$4,$5,$6)",
+                [notes, rating, pages, finishedDate, bookID, userID]
+            );
+        }
 
-        //keep going here
+        const bookResult = await db.query("SELECT * FROM book WHERE id = $1", [bookID]);
+        const bookData = bookResult.rows[0];
+
+        const notesResult = await db.query("SELECT * FROM mynotes WHERE bookid = $1 AND userid = $2", [bookID, userID]);
+        const mynotesData = notesResult.rows[0];
+
+        res.render("pages/notes.ejs", { bookData, mynotesData, username: userName });
     } catch (e) {
         console.log(e);
+        res.render("pages/login.ejs", { errorMessage: "Error while updating notes", username: userName });
     }
+});
 
+
+app.get("/updateNotes", async (req, res) => {
+    try {
+        const bookResult = await db.query("SELECT * FROM book WHERE id = $1", [bookID]);
+        const notesResult = await db.query("SELECT * FROM mynotes WHERE bookid = $1 AND userid = $2", [bookID, userID]);
+
+        const bookData = bookResult.rows[0];
+        const mynotesData = notesResult.rows[0] || {};
+
+        res.render("pages/update.ejs", { bookData, mynotesData, username: userName, errorMessage: "" });
+    } catch (e) {
+        console.log(e);
+        res.render("pages/login.ejs", { errorMessage: "Error opening update page", username: userName });
+    }
+});
+
+app.get('/books', async (req, res) => {
+    const result = await db.query('SELECT * FROM book WHERE userid = $1', [userID]);
+    res.render('index.ejs', { bookNotesData: result.rows });
+});
+
+app.post("/deleteNote", async (req, res) => {
+    await db.query("DELETE FROM mynotes WHERE userid = $1 AND bookID = $2", [userID, bookID]);
+
+    const result = await db.query('SELECT * FROM book WHERE userid = $1', [userID]);
+    res.render('index.ejs', { bookNotesData: result.rows });
+})
+
+app.post("/deleteBook", async (req, res) => {
+    await db.query("DELETE FROM book WHERE userid = $1 AND id = $2", [userID, bookID]);
+
+    const result = await db.query('SELECT * FROM book WHERE userid = $1', [userID]);
+    res.render('index.ejs', { bookNotesData: result.rows });
 })
 
 app.listen(port, () => {
